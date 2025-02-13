@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .background-star {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        h1 {
+            color: #ff66b2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .title-decoration {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+
+        .subtext {
+            color: #ff99cc;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: -10px;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .button-container {
+            margin: 20px;
+            position: relative;
+        }
+
+        .corner-rose {
+            position: absolute;
+            font-size: 24px;
+            top: -15px;
+            transform: rotate(45deg);
+        }
+
+        .corner-rose.left {
+            left: -25px;
+        }
+
+        .corner-rose.right {
+            right: -25px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #ff99cc, #ff66b2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .pizza-container {
+            display: none;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .pizza-img {
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <span class="title-decoration">🌹</span>
+        🍕 Happy Valentine's Day! 🌹
+        <span class="title-decoration">🌹</span>
+    </h1>
+    <p class="subtext">Because Friends & Pizza are the Perfect Match! 🌹</p>
+    <div class="button-container">
+        <span class="corner-rose left">🌹</span>
+        <button onclick="showPizza()">Click for Your Valentine Surprise! 🎉</button>
+        <span class="corner-rose right">🌹</span>
+    </div>
+    <div class="pizza-container" id="pizzaContainer">
+        <img src="https://accto.blob.core.windows.net/acctofiles/10-best-mid-range-Italian-Pizzeria-in-Gurgaon.webp" alt="Delicious pizza" class="pizza-img">
+    </div>
+
+    <script>
+        // Add background stars
+        function addBackgroundStars() {
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'background-star';
+                star.innerHTML = i % 2 === 0 ? '🌹' : '✨';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animation = `twinkle ${Math.random() * 2 + 2}s infinite`;
+                document.body.appendChild(star);
+            }
+        }
+
+        function createFloatingElement() {
+            const emojis = ['🌹', '🌹', '🌹', '💝', '✨', '🍕', '💖', '🌹'];
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.top = '100vh';
+            element.style.animation = `float ${Math.random() * 2 + 3}s linear`;
+            document.body.appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 5000);
+        }
+
+        function showPizza() {
+            const pizzaContainer = document.getElementById('pizzaContainer');
+            pizzaContainer.style.display = 'block';
+            
+            // Create multiple floating elements
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createFloatingElement, i * 100);
+            }
+        }
+
+        // Add background stars when page loads
+        addBackgroundStars();
+    </script>
+</body>
+</html>
